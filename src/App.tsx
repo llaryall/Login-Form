@@ -21,20 +21,26 @@ const LoginSignupForm: React.FC = () => {
   const handleShowLogin = (e: React.MouseEvent): void => {
     e.preventDefault();
     setIsSignup(false);
-   
-    
+
+
   };
 
   const handleShowSignup = (e: React.MouseEvent): void => {
     e.preventDefault();
     handleSignupBtnClick();
-   
+
   };
 
   return (
-    <div className="form-container">
+    <div
+      className="form-container"
+      style={{
+        transform: isExpanding ? 'scale(1.1)' : 'scale(1)',
+        transition: 'transform 0.5s ease-in-out',
+      }}
+    >
       <AnimatePresence mode="wait">
-        {!isSignup ? (
+        {!isSignup || showSignupBtn ? (
           <motion.div
             className="form"
             key="login"
@@ -76,7 +82,9 @@ const LoginSignupForm: React.FC = () => {
             </div>
             <p className="switch-form">Don't have an account? <a href="#" onClick={handleShowSignup}>Sign up</a></p>
           </motion.div>
+
         ) : (
+
           <motion.div
             className="form"
             key="signup"
@@ -108,7 +116,7 @@ const LoginSignupForm: React.FC = () => {
         )}
       </AnimatePresence>
 
-     
+
     </div>
   );
 };
